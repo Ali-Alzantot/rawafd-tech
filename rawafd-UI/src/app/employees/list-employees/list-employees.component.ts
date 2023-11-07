@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { Employee } from 'src/app/models/employee';
 import { EmployeesResourceService } from '../employees-resource.service';
 
@@ -11,9 +12,10 @@ import { EmployeesResourceService } from '../employees-resource.service';
 })
 export class ListEmployeesComponent {
   employees: Employee[] = [];
+  loading: boolean = true;
 
   constructor(private router: Router, private employeesResourceService: EmployeesResourceService
-    ,private messageService: MessageService, private confirmationService: ConfirmationService) {
+    , private messageService: MessageService, private confirmationService: ConfirmationService) {
   }
 
   ngOnInit(): void {
@@ -21,15 +23,18 @@ export class ListEmployeesComponent {
   }
 
   getAllEmployees(): void {
+    this.loading = true;
     this.employeesResourceService.getAllEmployees()
-    .subscribe(employees => {
+      .subscribe(employees => {
         this.employees = employees;
+        this.loading = false;
       }, error => {
         this.messageService.add({
           severity: "error",
           summary: "Error",
           detail: "Error while getting employees"
         });
+        this.loading = false;
       });
   }
 
@@ -48,25 +53,24 @@ export class ListEmployeesComponent {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.employeesResourceService.deleteEmployee(employee.id!)
-        .subscribe(() => {
-          this.messageService.add({
-            severity: "success",
-            summary: "success",
-            detail: "employee delted successfully"
+          .subscribe(() => {
+            this.messageService.add({
+              severity: "success",
+              summary: "success",
+              detail: "employee delted successfully"
+            });
+            this.getAllEmployees();
+          }, error => {
+            this.messageService.add({
+              severity: "error",
+              summary: "Error",
+              detail: "Error deleting employee"
+            });
           });
-          this.getAllEmployees();
-        }, error => {
-          this.messageService.add({
-            severity: "error",
-            summary: "Error",
-            detail: "Error deleting employee"
-          });
-        });
       },
       reject: () => {
-          this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
       }
-  });
+    });
   }
-
 }
