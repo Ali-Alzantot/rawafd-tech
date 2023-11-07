@@ -1,0 +1,45 @@
+<h1 *ngIf="isAdd" class="mb-5 mt-3"> Add new Employee</h1>
+
+<h1 *ngIf="!isAdd" class="mb-5 mt-3">Update the Employee</h1>
+
+
+<form #employeeForm="ngForm" (submit)="saveEmployee()">
+
+   <div class="row">
+        <div class="col-md-4">
+            <label for="firstName" class="d-block mb-2">First Name</label>
+            <input [(ngModel)]="employee.firstName" name="firstName" class="w-100" id="firstName" required type="text"
+                placeholder="please insert first name" pInputText>
+        </div>
+        <div class="col-md-4">
+            <label for="lastName" class="d-block mb-2">Last Name</label>
+            <input [(ngModel)]="employee.lastName" name="lastName" class="w-100" id="lastName" required type="text"
+                placeholder="please insert last name" pInputText>
+        </div>
+        <div class="col-md-4">
+            <label for="email" class="d-block mb-2">Email</label>
+            <input [(ngModel)]="employee.email" name="email" class="w-100" id="email" required type="text"
+                placeholder="please insert email" pInputText>
+        </div>
+        <div class="col-md-4 mt-3">
+            <label for="phone" class="d-block mb-2">Phone</label>
+            <input [(ngModel)]="employee.phone" name="phone" class="w-100" id="phone" required type="text"
+                placeholder="please insert phone" pInputText>
+        </div>
+        <div class="col-md-4 mt-3">
+            <label for="salary" class="d-block mb-2">Salary</label>
+            <input [(ngModel)]="employee.salary" name="phone" class="w-100" id="salary" required type="number"
+                placeholder="please insert salary" pInputText>
+        </div>
+
+        <div class="col-xxl-12 mt-3" style="text-align: center">
+            <p-button label="Save" styleClass="primary-button"
+             [disabled]="!employeeForm.valid" type="submit"></p-button>
+        </div>
+   </div>
+   
+
+
+</form>
+
+<p-toast></p-toast>

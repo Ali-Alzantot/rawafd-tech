@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("employees")
+@CrossOrigin
 @Slf4j
 public class EmployeeResource {
 
@@ -28,7 +29,7 @@ public class EmployeeResource {
     }
 
     @DeleteMapping("{id}")
-    public void deleteEmployee(@PathVariable("mobileNumber") Long employeeId) throws Exception {
+    public void deleteEmployee(@PathVariable("id") Long employeeId) throws Exception {
         employeeService.deleteEmployee(employeeId);
     }
 

@@ -1,0 +1,45 @@
+<div class="mb-3"></div>
+<p-button [outlined]="true" (click)="goToAddEmployee()">
+    <span class="ml-2 font-bold">Add Employee</span>
+</p-button>
+
+<div class="mb-3"></div>
+
+<div class="row">
+    <p-table class="col-md-12" [value]="employees" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Salary</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employee>
+            <tr>
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.firstName }}</td>
+                <td>{{ employee.lastName }}</td>
+                <td>{{ employee.phone }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.salary }}</td>
+                <td>
+                    <button pButton type="button" class="p-button-outlined p-button-rounded float-end"
+                        icon="pi pi-pencil" pTooltip="Update" tooltipPosition="top"
+                        (click)="goToUpdateEmployee(employee)"></button>
+                </td>
+                <td>
+                    <button pButton type="button" class="p-button-outlined p-button-rounded p-button-danger float-end"
+                        icon="pi pi-trash" pTooltip="Remove" tooltipPosition="top"
+                        (click)="confirmDelete($event, employee)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>
