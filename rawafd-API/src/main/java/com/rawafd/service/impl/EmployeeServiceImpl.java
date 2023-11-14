@@ -47,8 +47,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 	@Override
-	public EmployeeModel findEmployeeById(Long employeeId) {
-		return employeeMapper.toModel(employeeRepository.findById(employeeId).orElseGet(null));
+	public EmployeeModel findEmployeeById(Long employeeId) throws Exception {
+		return employeeMapper.toModel(employeeRepository.findById(employeeId).orElseThrow(() -> new Exception("Employee not found")));
 	}
 
 	@Override

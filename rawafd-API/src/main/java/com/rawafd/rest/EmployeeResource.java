@@ -39,7 +39,7 @@ public class EmployeeResource {
     }
 
     @GetMapping("{id}")
-    EmployeeModel findEmployeeById(@PathVariable("id") Long employeeId) {
+    EmployeeModel findEmployeeById(@PathVariable("id") Long employeeId) throws Exception {
         return employeeService.findEmployeeById(employeeId);
     }
 

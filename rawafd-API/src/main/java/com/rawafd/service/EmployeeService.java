@@ -13,7 +13,7 @@ public interface EmployeeService {
 
     void deleteEmployee(Long employeeId) throws Exception;
 
-    EmployeeModel findEmployeeById(Long employeeId);
+    EmployeeModel findEmployeeById(Long employeeId) throws Exception;
 
     List<EmployeeModel> findAllEmployees();
 
